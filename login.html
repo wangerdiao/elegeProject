@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            margin:0px;
+            padding: 0px;
+        }
+        video{  
+            position: fixed;  
+            min-width: 100%;  
+            min-height: 100%;  
+            height: auto;  
+            width: 50%;  
+            z-index:-11;
+        }  
+        source{  
+            min-width: 100%;  
+            min-height: 100%;  
+            height: auto;  
+            width: auto;  
+        } 
+        .login {
+            position: fixed;
+            margin-left: 40%;
+            margin-top: 17%;
+        }
+        h2 {
+            text-align: center;
+            margin-bottom: 5px;
+        }
+        .account {
+            margin-bottom: 5px;
+            border-radius: 6px;
+        }
+        .pwd {
+            margin-bottom: 5px;
+            border-radius: 6px;
+        }
+        .denglu {
+            font-size: 10px;
+            width: 30px;
+            height: 25px;
+            margin-top: 5px;
+            margin-left: 100px;
+            border-radius: 6px;
+        }
+        
+    </style>
+</head>
+<body>
+    <video id="v1" autoplay loop muted>
+        <source src="./src/assets/壁纸1.mp4" type="video/mp4"/>
+    </video>
+   <div class="login">
+     <h2 class="title">二雕云盘</h2> 
+            账号<input type="text" value="wangerdiao" name="account" class="account"><br>
+            密码<input type="password" value="111111" name="pwd" class="pwd"><br>
+            <button class="denglu">登录</button>
+   </div>
+</body>
+</html>
