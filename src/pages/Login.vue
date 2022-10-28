@@ -5,12 +5,12 @@
     </video>
    <div class="login">
      <h2 class="title">二雕云盘</h2> 
-            账号<input type="text" value="wangerdiao" name="account" class="account"><br>
-            密码<input type="password" value="111111" name="pwd" class="pwd"><br>
+            账号:<input type="text" value="wangerdiao" name="account" class="account"><br>
+            密码:<input type="password" value="111111" name="pwd" class="pwd"><br>
             <button class="denglu">登录</button>
             <button class="register" @click="gotoRegister">注册</button>
+            
    </div>
-    <router-view></router-view>
   </div>
 </template>
 
@@ -19,9 +19,7 @@ export default {
   name: "Login",
   methods:{
     gotoRegister(){
-      this.$router.push({  //push方法
-                name:'zhuce', 
-            })
+      this.$router.push('/register')
     }
   }
 };
