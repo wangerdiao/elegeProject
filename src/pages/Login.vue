@@ -5,11 +5,10 @@
     </video>
    <div class="login">
      <h2 class="title">二雕云盘</h2> 
-            账号:<input type="text" value="wangerdiao" name="account" class="account"><br>
-            密码:<input type="password" value="111111" name="pwd" class="pwd"><br>
-            <button class="denglu">登录</button>
+            账号:<input type="text" v-model="account" name="account" class="account"><br>
+            密码:<input type="password" v-model="password" name="pwd" class="pwd"><br>
+            <button class="denglu" @click="login">登录</button>
             <button class="register" @click="gotoRegister">注册</button>
-            
    </div>
   </div>
 </template>
@@ -17,9 +16,20 @@
 <script>
 export default {
   name: "Login",
+  data() {
+    return {
+      account:'',
+      password:'',
+    }
+  },
   methods:{
+    //进入注册页面
     gotoRegister(){
       this.$router.push('/register')
+    },
+    //登录按钮
+    login() {
+
     }
   }
 };

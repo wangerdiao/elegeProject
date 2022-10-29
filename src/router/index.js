@@ -2,6 +2,7 @@ import VueRouter from "vue-router";
 //引入组件
 import Login from '../pages/Login'
 import Register from '../pages/Register'
+import Home from '../pages/home'
 //创建并暴露一个路由器
 const router =  new VueRouter({
     routes:[
@@ -14,6 +15,14 @@ const router =  new VueRouter({
             path:'/register',
             component:Register
         },
+        {
+            path:'*',
+            redirect:'Login'
+        },
+        {
+            path:'/home',
+            component:Home
+        }
     ]
 })
 const originalPush = VueRouter.prototype.push

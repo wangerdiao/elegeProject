@@ -3,42 +3,24 @@
     <!-- 注册内容 -->
     <div class="register">
       <h3>注册新用户
-        <span class="go">我有账号，去 登陆
-        </span>
+        <span class="go"  @click="goLogin">我有账号，去 登陆</span>
       </h3>
       <div class="content">
-        <label>手机号:</label>
-        <input
-          placeholder="请输入你的手机号"
-          name="phone"
-        />
+        <label>账号:</label>
+        <input placeholder="请输入你的账号" name="phone" v-model="account"/>
       </div>
-      <div class="content">
-        <label>验证码:</label>
-        <input
-          placeholder="请输入你的验证码"
-          name="Code"
-        />
-        <button style="width:90px;height:38px" >获取验证码</button>
-      </div>
+      
       <div class="content">
         <label>登录密码:</label>
-        <input
-          type="password"
-          placeholder="请输入你的密码"
-          name="password"
-        />
+        <input type="password" placeholder="请输入你的密码" name="password" v-model="password"/>
       </div>
       <div class="content">
         <label>确认密码:</label>
-        <input
-          type="password"
-          placeholder="请输入你的确认密码"
-          name="password1"
-        />
+        <input type="password" placeholder="请输入你的确认密码" name="password1" v-model="password1" @blur="showErr"/>
+        <span v-show="!isTrue" id="isTrue">确认密码与登录密码不同</span>
       </div>
       <div class="btn">
-        <button >完成注册</button>
+        <button @click="register">完成注册</button>
       </div>
     </div>
 
@@ -46,9 +28,38 @@
 </template>
 
 <script>
+import {reqPostRegister} from '@/api/index'
 export default {
-    name:'Register'
-}
+    name:'Register',
+    data() {
+      return {
+        account:'',
+        password:'',
+        password1:'',
+        isTrue:true, // 判断确认密码是否正确
+      }
+    },
+    methods:{
+      //确认密码失去焦点事件
+      showErr() {
+        this.isTrue =  this.password === this.password1? true:false
+      },
+      //点击去登录按钮
+      goLogin(){
+        this.$router.push('./login')
+      },
+      async register(){
+       try {
+        const data = `account=${this.account}&password=${this.password}`
+        let result = await reqPostRegister(data)
+        console.log(result)
+       } catch (error) {
+        console.log(error)
+       }
+      }
+  }
+    
+} 
 </script>
 
 <style lang="less" scoped>
@@ -163,6 +174,10 @@ export default {
           margin: 15px 0;
         }
       }
+    }
+    #isTrue {
+      padding-left: 5px;
+      color:red
     }
   }
 </style>
