@@ -1,8 +1,8 @@
 <template>
-  <div>
-    我是主页
-    
-  </div>
+    <div class="container">
+      <SlideNav></SlideNav>
+      我是主页
+    </div>
 </template>
 
 <script>
@@ -11,6 +11,9 @@ export default {
 }
 </script>
 
-<style>
-
+<style scoped>
+  .container {
+    display: flex;
+    height: 100%;
+  }
 </style>

@@ -5,15 +5,16 @@
     </video>
    <div class="login">
      <h2 class="title">二雕云盘</h2> 
-            账号:<input type="text" v-model="account" name="account" class="account"><br>
-            密码:<input type="password" v-model="password" name="pwd" class="pwd"><br>
-            <button class="denglu" @click="login">登录</button>
-            <button class="register" @click="gotoRegister">注册</button>
+            <form >账号:<input type="text" v-model="account" name="account" class="account" autocomplete></form>
+           <form > 密码:<input type="password" v-model="password" name="pwd" class="pwd" autocomplete></form>
+           <el-button  @click="login" size="mini" class="denglu">登录</el-button>
+            <el-button   @click="gotoRegister" size="mini" class="zhuce">注册</el-button>
    </div>
   </div>
 </template>
 
 <script>
+import {reqPostLogin} from '@/api/index'
 export default {
   name: "Login",
   data() {
@@ -28,8 +29,28 @@ export default {
       this.$router.push('/register')
     },
     //登录按钮
-    login() {
-
+    async login() {
+     if(this.account !=='' && this.password !=='') {
+      const data = `account=${this.account}&password=${this.password}`
+      let result = await reqPostLogin(data)
+      if(result.data===200) {
+        this.$message({
+          message: '登录成功',
+          type: 'success'
+        });
+        this.$router.push('/home')
+      }else {
+        this.$message({
+          message: '登录失败，账号或密码错误',
+          type: 'warning'
+        });
+      }
+     }else {
+      this.$message({
+          message: '登录失败，账号或密码不能为空',
+          type: 'warning'
+        });
+     }
     }
   }
 };
@@ -69,16 +90,12 @@ export default {
         }
         .denglu {
             font-size: 10px;
-            width: 30px;
-            height: 25px;
             margin-top: 5px;
             margin-left: 50px;
             border-radius: 6px;
         }
         .register {
             font-size: 10px;
-            width: 30px;
-            height: 25px;
             margin-top: 5px;
             margin-left: 50px;
             border-radius: 6px;

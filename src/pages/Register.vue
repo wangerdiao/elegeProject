@@ -7,20 +7,24 @@
       </h3>
       <div class="content">
         <label>账号:</label>
-        <input placeholder="请输入你的账号" name="phone" v-model="account"/>
+        <input placeholder="请输入你的账号" name="phone" v-model="account" autocomplete/>
       </div>
       
       <div class="content">
+        <form >
         <label>登录密码:</label>
-        <input type="password" placeholder="请输入你的密码" name="password" v-model="password"/>
+        <input type="password" placeholder="请输入你的密码" name="password" v-model="password" autocomplete/>
+        </form>
       </div>
       <div class="content">
+        <form >
         <label>确认密码:</label>
-        <input type="password" placeholder="请输入你的确认密码" name="password1" v-model="password1" @blur="showErr"/>
+        <input type="password" placeholder="请输入你的确认密码" name="password1" v-model="password1" @blur="showErr" autocomplete/>
+        </form>
         <span v-show="!isTrue" id="isTrue">确认密码与登录密码不同</span>
       </div>
       <div class="btn">
-        <button @click="register">完成注册</button>
+        <el-button  @click="register">完成注册</el-button>
       </div>
     </div>
 
@@ -49,12 +53,33 @@ export default {
         this.$router.push('./login')
       },
       async register(){
-       try {
+       if(this.account !=='' && this.password !=='' && this.password1 !==''){
+        try {
         const data = `account=${this.account}&password=${this.password}`
         let result = await reqPostRegister(data)
-        console.log(result)
+        if(result.data===200) {
+          this.$message({
+          showClose: true,
+          message: '注册成功',
+          type: 'success'
+        });
+          this.$router.push('/login')
+        }else {
+          this.$message({
+          showClose: true,
+          message: '注册失败，账户已经存在',
+          type: 'warning'
+        });
+        }
        } catch (error) {
         console.log(error)
+       }
+       }else {
+        this.$message({
+          showClose: true,
+          message: '请输入完整的登录账号和密码',
+          type: 'warning'
+        });
        }
       }
   }

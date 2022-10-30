@@ -16,4 +16,7 @@ export default {
             margin:0px;
             padding: 0px;
         }
+    #app {
+      height: 100%;
+    }
 </style>
