@@ -1,7 +1,7 @@
 <template>
   <div>
     <video id="v1" autoplay loop muted>
-        <source src="../assets/壁纸1.mp4" type="video/mp4"/>
+        <source src="../assets/backgroundVedio.mp4" type="video/mp4"/>
     </video>
    <div class="login">
      <h2 class="title">二雕云盘</h2> 
@@ -39,13 +39,7 @@ export default {
           message: '登录成功',
           type: 'success'
         });
-        this.$bus.$emit('sendAccount',this.account) //传递给SlideNAv组件用户名
-        // this.$router.push({
-        //   name:'zhuye',
-        //   params:{
-        //     account:this.account
-        //   }
-        // })
+        this.$store.commit('USER',this.account) //在vuex中存储用户名
         this.$router.push('/home')
       }else {
         this.$message({
