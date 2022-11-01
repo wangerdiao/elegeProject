@@ -17,9 +17,10 @@ const router =  new VueRouter({
         },
         {
             path:'*',
-            redirect:'Home'
+            redirect:'Login'
         },
         {
+            name:'zhuye',
             path:'/home',
             component:Home
         }

@@ -30,7 +30,8 @@ export default {
     },
     //登录按钮
     async login() {
-     if(this.account !=='' && this.password !=='') {
+    try {
+      if(this.account !=='' && this.password !=='') {
       const data = `account=${this.account}&password=${this.password}`
       let result = await reqPostLogin(data)
       if(result.data===200) {
@@ -38,6 +39,13 @@ export default {
           message: '登录成功',
           type: 'success'
         });
+        this.$bus.$emit('sendAccount',this.account) //传递给SlideNAv组件用户名
+        // this.$router.push({
+        //   name:'zhuye',
+        //   params:{
+        //     account:this.account
+        //   }
+        // })
         this.$router.push('/home')
       }else {
         this.$message({
@@ -51,6 +59,12 @@ export default {
           type: 'warning'
         });
      }
+    } catch (error) {
+      this.$message({
+          message: error,
+          type: 'warning'
+        });
+    }
     }
   }
 };
