@@ -13,6 +13,6 @@ export default {
 <style scoped>
     .file {
         display: flex;
-        
+        margin-top: 20px;
     }
 </style>
