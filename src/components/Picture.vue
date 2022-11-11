@@ -3,7 +3,11 @@
         <el-upload
         class="upload-demo"
         drag
-        action="https://jsonplaceholder.typicode.com/posts/"
+        action="http://localhost:3000/picture"
+        :on-preview="handlePictureCardPreview" 
+        :on-success="uploadSuccess"
+        :data="userName"
+        :show-file-list="false"
         multiple>
         <i class="el-icon-upload"></i>
         <div class="el-upload__text">将文件拖到此处，或<em>点击上传</em></div>
@@ -13,8 +17,26 @@
 </template>
 
 <script>
+import {reqGetShowPicture} from '@/api/index'
 export default {
-    name:'Picture'
+    name:'Picture',
+    mounted(){
+        const {user} = this.userName
+        const result = reqGetShowPicture(user)
+    },
+    data(){
+        return {
+            userName:{user:this.$store.state.user} || ''
+        }
+    },
+    methods:{
+        handlePictureCardPreview(res,file,fileList){
+            console.log(file)
+        },
+        uploadSuccess(res,file,fileList){
+            console.log(file,'文件上传成功')
+        },
+    }
 }
 </script >
 

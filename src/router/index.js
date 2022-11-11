@@ -64,10 +64,8 @@ router.beforeEach(async (to,from,next) => {
         if(!token) {
            next('/login')
         }else {
-            console.log(token)
             const data = `token=${token}`
             let result = await reqGetToken(data)
-            console.log(result)
             if(result.status ===200) next()
             else next('/login') //没有强制跳转到login页面
         }
