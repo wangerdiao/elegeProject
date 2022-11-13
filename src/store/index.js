@@ -7,6 +7,7 @@ const actions = {
 const mutations = {
     USER(state,value) {
         state.user = value
+        sessionStorage.setItem('user',JSON.stringify(value)) //本地存储user
     }
 }
 const state = {

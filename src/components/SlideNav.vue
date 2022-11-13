@@ -33,7 +33,7 @@
   <div class="capacity"></div>
   <div class="user">
     <svg t="1667138670836" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2895" width="32" height="32"><path d="M498.602667 191.744a204.714667 204.714667 0 0 1 116.906666 372.8c133.162667 47.317333 229.077333 173.290667 231.893334 322.026667l0.085333 6.784h-64c0-157.333333-127.573333-284.885333-284.885333-284.885334-155.136 0-281.301333 123.968-284.821334 278.250667l-0.085333 6.613333h-64c0-151.68 96.810667-280.746667 232-328.810666a204.714667 204.714667 0 0 1 116.906667-372.8z m0 64a140.714667 140.714667 0 1 0 0 281.450667 140.714667 140.714667 0 0 0 0-281.450667z" fill="#1677FF" p-id="2896"></path></svg>
-    <span class="name">{{$store.state.user}}</span> <i class="el-icon-circle-close" @click="close"></i>
+    <span class="name">{{userName}}</span> <i class="el-icon-circle-close" @click="close"></i>
   </div>
   </div>
 </template>
@@ -87,6 +87,11 @@ export default {
           }
         })
       },
+    },
+    computed:{
+      userName(){
+        return this.$store.state.user? this.$store.state.user:JSON.parse(sessionStorage.getItem('user'))
+      }
     }
    
 }
