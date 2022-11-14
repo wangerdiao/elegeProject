@@ -55,10 +55,8 @@ export default {
         //获取图片回调
         async getPicture(pages=1){
             this.page=pages
-            console.log(pages)
             const {user} = this.userName
             const result = await reqGetShowPicture(user,this.page)
-            console.log(result)
             if(result.code=== '200')  {
                 this.imgList = result.sendData
                 this.total = result.total
@@ -71,11 +69,12 @@ export default {
             }
         },
         handlePictureCardPreview(res,file,fileList){
-            console.log(file)
+            console.log('我时handlePictureCardPreview')
         },
         uploadSuccess(res,file,fileList){
-            console.log(file,'文件上传成功')
-            this.getPicture() //调用获取图片的回调
+            const {user} = this.userName
+            console.log(this.page,'当前页面')
+            this.getPicture(this.page) //调用获取图片的回调
         },
     }
 }
