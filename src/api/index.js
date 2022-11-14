@@ -6,4 +6,4 @@ export const reqPostRegister = (data) => requests({url:'/register',method:'POST'
 //判断token的接口
 export const reqGetToken = (data) => requests({url:'isHaveToken',method:'POST',data})
 //获取展示图片的接口
-export const reqGetShowPicture = (user) => requests({url:`/picture/showPicture?user=${user}`,method:'GET'})
+export const reqGetShowPicture = (user,page) => requests({url:`/picture/showPicture?user=${user}&page=${page}`,method:'GET'})

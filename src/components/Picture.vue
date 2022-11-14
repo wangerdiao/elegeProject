@@ -20,6 +20,16 @@
             <img :src="showImg?showImg.src:defaultImg" alt="" class="imgList">
         </li>
        </ul>
+       <el-pagination
+            background
+            class="pagination"
+            layout="prev, pager, next"
+            :current-page="page"
+            @current-change="getPicture"
+            :page-size="limit"
+            hide-on-single-page
+            :total="total">
+        </el-pagination>
     </div>
 </template>
 
@@ -35,17 +45,24 @@ export default {
         return {
             userName:{user:this.$store.state.user?this.$store.state.user:JSON.parse(sessionStorage.getItem('user'))} ,
             imgList:[],
-            defaultImg
+            defaultImg,
+            total:0, //总共的数据
+            page:1, //当前第几页
+            limit:0  //页面展示limit个数据
         }
     },
     methods:{
         //获取图片回调
-        async getPicture(){
+        async getPicture(pages=1){
+            this.page=pages
+            console.log(pages)
             const {user} = this.userName
-            const result = await reqGetShowPicture(user)
+            const result = await reqGetShowPicture(user,this.page)
             console.log(result)
             if(result.code=== '200')  {
-                this.imgList = result.img
+                this.imgList = result.sendData
+                this.total = result.total
+                this.limit = result.limit
             }else {
                 this.$message({
             message: '获取图片资源失败',
@@ -86,5 +103,11 @@ export default {
         height: 200px;
         width: 200px;
         object-fit:cover;
+    }
+    .pagination {
+        text-align: center;
+        position: fixed;
+        left: 640px;
+        bottom: 56px;
     }
 </style>
