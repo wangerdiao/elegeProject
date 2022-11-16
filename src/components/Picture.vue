@@ -13,11 +13,14 @@
                 multiple>
                 <i class="el-icon-upload"></i>
                 <div class="el-upload__text">将文件拖到此处，或<em>点击上传</em></div>
-                <div class="el-upload__tip" slot="tip">只能上传jpg/png文件且不超过500kb</div>
+                
             </el-upload>
         </li>
-        <li v-for="(showImg) in imgList" :key="showImg.index" >
+        <li v-for="(showImg) in imgList" :key="showImg.img_id" >
             <img :src="showImg?showImg.src:defaultImg" alt="" class="imgList">
+            <div><i class="el-icon-delete" @click="deleteImg(showImg.img_id)"></i>
+                <i class="el-icon-star-off" @click="loveImg(showImg.img_id)"></i>
+            </div>
         </li>
        </ul>
        <el-pagination
@@ -34,7 +37,7 @@
 </template>
 
 <script>
-import {reqGetShowPicture} from '@/api/index'
+import {reqGetShowPicture,reqPostDeletePicture} from '@/api/index'
 import defaultImg from '../../public/images/4RrS6Nn2YL.jpg'
 export default {
     name:'Picture',
@@ -72,10 +75,30 @@ export default {
             console.log('我时handlePictureCardPreview')
         },
         uploadSuccess(res,file,fileList){
-            const {user} = this.userName
-            console.log(this.page,'当前页面')
+            this.$message({
+            message: '上传图片成功',
+            type: 'success'
+            });
             this.getPicture(this.page) //调用获取图片的回调
         },
+        //删除图片的回调
+        async deleteImg(id) {
+            console.log('删除',id)
+            const {user} = this.userName
+            const result = await reqPostDeletePicture(id,user)
+            console.log(result)
+            if(result.code==200) {
+                this.$message({
+                message: '删除图片成功',
+                type: 'success'
+                });
+                this.getPicture(this.page) //重新加载页面
+            }
+        },
+        //加入收藏夹的回调
+        loveImg(id){
+            console.log('喜欢',id)
+        }
     }
 }
 </script >
@@ -107,6 +130,6 @@ export default {
         text-align: center;
         position: fixed;
         left: 640px;
-        bottom: 56px;
+        bottom: 30px;
     }
 </style>
