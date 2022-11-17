@@ -12,10 +12,6 @@
       background-color="#545c64"
       text-color="#fff"
       active-text-color="#ffd04b">
-      <el-menu-item index="1" @click="toFile">
-        <i class="el-icon-folder"></i>
-        <span slot="title" >{{File}}</span>
-      </el-menu-item>
       <el-menu-item index="2" @click="toPicture">
         <i class="el-icon-picture"></i>
         <span slot="title" >{{Picture}}</span>
@@ -44,7 +40,6 @@ export default {
     data(){
       return {
         user:1,
-        File:'文件',
         Picture:'相册',
         Love:'收藏夹',
         Recycle:'回收站'
@@ -54,14 +49,6 @@ export default {
       close() {
         localStorage.removeItem("token")
         this.$router.push('/login')
-      },
-      toFile(){
-        this.$router.push({
-          name:'file',
-          params:{
-            toWhere:this.File
-          }
-        })
       },
       toPicture(){
         this.$router.push({

@@ -3,7 +3,6 @@ import VueRouter from "vue-router";
 import Login from '../pages/Login'
 import Register from '../pages/Register'
 import Home from '../pages/home'
-import File from '@/components/File'
 import Love from '@/components/Love'
 import Picture from '@/components/Picture'
 import Recycle from '@/components/Recycle'
@@ -30,11 +29,6 @@ const router =  new VueRouter({
             path:'/home',
             component:Home,
             children:[
-                {
-                    name:'file',
-                    path:'file/:to?',
-                    component:File
-                },
                 {
                     name:'picture',
                     path:'picture/:to?',

@@ -6,7 +6,6 @@
                 class="upload-demo"
                 drag
                 action="http://localhost:3000/picture"
-                :on-preview="handlePictureCardPreview" 
                 :on-success="uploadSuccess"
                 :data="userName"
                 :show-file-list="false"
@@ -37,7 +36,7 @@
 </template>
 
 <script>
-import {reqGetShowPicture,reqPostDeletePicture} from '@/api/index'
+import {reqGetShowPicture,reqPostDeletePicture,reqPostLoveImg} from '@/api/index'
 import defaultImg from '../../public/images/4RrS6Nn2YL.jpg'
 export default {
     name:'Picture',
@@ -71,9 +70,7 @@ export default {
             });
             }
         },
-        handlePictureCardPreview(res,file,fileList){
-            console.log('我时handlePictureCardPreview')
-        },
+        //成功上传的回调
         uploadSuccess(res,file,fileList){
             this.$message({
             message: '上传图片成功',
@@ -83,7 +80,6 @@ export default {
         },
         //删除图片的回调
         async deleteImg(id) {
-            console.log('删除',id)
             const {user} = this.userName
             const result = await reqPostDeletePicture(id,user)
             console.log(result)
@@ -96,8 +92,15 @@ export default {
             }
         },
         //加入收藏夹的回调
-        loveImg(id){
-            console.log('喜欢',id)
+        async loveImg(id){
+            const {user} = this.userName
+            let result = await reqPostLoveImg(user,id)
+            if(result.code==200) {
+                this.$message({
+                message: '收藏图片成功',
+                type: 'success'
+                });
+            }
         }
     }
 }

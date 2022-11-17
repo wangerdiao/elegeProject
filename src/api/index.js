@@ -11,3 +11,11 @@ export const reqGetShowPicture = (user, page) => requests({ url: `/picture/showP
 export const reqPostDeletePicture = (id, user) => requests({ url: `/deletePicture?id=${id}&user=${user}`, method: 'POST' })
 //获取展示回收站图片的接口
 export const reqGetShowDeletePicture = (user, page) => requests({ url: `/recycle?user=${user}&page=${page}`, method: 'GET' })
+//删除回收站图片的接口
+export const reqDeleteRecyclePicture = (user, id) => requests({ url: `/removeRecycleImg?user=${user}&id=${id}`, method: 'DELETE' })
+//回收回收站图片的接口
+export const reqPostRecyclePicture = (user, id) => requests({ url: `/recycleImg?user=${user}&id=${id}`, method: 'POST' })
+//接受用户收藏图片的接口
+export const reqPostLoveImg = (user, id) => requests({ url: `/loveImg?user=${user}&id=${id}`, method: 'POST' })
+//获取收藏图片的接口
+export const reqGetLoveImg = (user, page) => requests({ url: `/showMyLoveImg?user=${user}&page=${page}`, method: 'GET' })
