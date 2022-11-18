@@ -19,3 +19,5 @@ export const reqPostRecyclePicture = (user, id) => requests({ url: `/recycleImg?
 export const reqPostLoveImg = (user, id) => requests({ url: `/loveImg?user=${user}&id=${id}`, method: 'POST' })
 //获取收藏图片的接口
 export const reqGetLoveImg = (user, page) => requests({ url: `/showMyLoveImg?user=${user}&page=${page}`, method: 'GET' })
+//下载的接口
+export const reqGetDownloadImg = (user,id) =>requests({ url: `/picture/downloadPicture?user=${user}&id=${id}`, method: 'GET' })

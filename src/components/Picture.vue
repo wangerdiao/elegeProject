@@ -19,6 +19,7 @@
             <img :src="showImg?showImg.src:defaultImg" alt="" class="imgList">
             <div><i class="el-icon-delete" @click="deleteImg(showImg.img_id)"></i>
                 <i class="el-icon-star-off" @click="loveImg(showImg.img_id)"></i>
+                <i class="el-icon-download" @click="downloadImg(showImg.img_id)"></i>
             </div>
         </li>
        </ul>
@@ -36,7 +37,7 @@
 </template>
 
 <script>
-import {reqGetShowPicture,reqPostDeletePicture,reqPostLoveImg} from '@/api/index'
+import {reqGetShowPicture,reqPostDeletePicture,reqPostLoveImg,reqGetDownloadImg} from '@/api/index'
 import defaultImg from '../../public/images/4RrS6Nn2YL.jpg'
 export default {
     name:'Picture',
@@ -100,7 +101,13 @@ export default {
                 message: '收藏图片成功',
                 type: 'success'
                 });
+                this.getPicture()
             }
+        },
+        async downloadImg(id) {
+            const {user} = this.userName
+            const result = await reqGetDownloadImg(user,id)
+            console.log(result)
         }
     }
 }

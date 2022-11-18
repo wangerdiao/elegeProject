@@ -82,9 +82,11 @@ export default {
     async recycleImg(id) {
       const { user } = this.userName;
       const result = await reqPostRecyclePicture(user, id);
+      console.log(result)
       if (result.code == 200) {
+        const {message} = result
         this.$message({
-          message: "图片已从回收站中回收",
+          message,
           type: "success",
         });
         this.getDeletePicture();

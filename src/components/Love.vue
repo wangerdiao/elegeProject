@@ -3,8 +3,10 @@
         <ul class="myImg">
         <li v-for="(showImg) in imgList" :key="showImg.img_id" >
             <img :src="showImg?showImg.src:defaultImg" alt="" class="imgList">
-            <div><i class="el-icon-success" @click="recycleImg(showImg.img_id)"></i>
-                <i class="el-icon-error" @click="removeImg(showImg.img_id)"></i>
+            <div>
+                <i class="el-icon-delete" @click="removeImg(showImg.img_id)"></i>
+                <i class="el-icon-star-on" @click="recycleImg(showImg.img_id)"></i>
+                <i class="el-icon-download" @click="loveImg(showImg.img_id)"></i>
             </div>
         </li>
        </ul>
